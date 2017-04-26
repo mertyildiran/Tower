@@ -1,0 +1,59 @@
+.btn-primary {
+  color: #ffffff;
+  background-color: #13818D;
+  border-color: #93C9CF;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #13688D;
+  border-color: #93C9CF;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #13818D;
+  border-color: #93C9CF;
+}
+
+.btn-primary .badge {
+  color: #13818D;
+  background-color: #ffffff;
+}
+
+a {
+    color: #13818D !important;
+}
+
+a:hover {
+    color: #13688D !important;
+}
+
+input:focus, textarea:focus {
+    outline: none !important;
+    border: 1px solid #93C9CF !important;
+    box-shadow: 0 0 10px #13818D !important;
+}

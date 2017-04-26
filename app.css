@@ -5,3 +5,11 @@
 .help-block {
     font-size: 12px;
 }
+
+#tower-logo-wrapper {
+    text-align: center;
+}
+
+#tower-logo {
+    width: 75%;
+}
