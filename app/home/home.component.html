@@ -11,16 +11,19 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
+            <a href="#">
+                <img id="tower-logo-dashboard" src="/assets/img/tower.png" />
+            </a>
 			<a class="navbar-brand" href="#">
-				Administrator
+				&nbsp;Tower
 			</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<form class="navbar-form navbar-left" method="GET" role="search">
-				<div class="form-group">
-					<input type="text" name="q" class="form-control" placeholder="Search">
+			<form class="navbar-form navbar-left" method="GET" role="search" id="search-bar">
+				<div class="form-group" style="width: 80%;">
+					<input type="text" name="q" class="form-control" placeholder="Search" style="width: 100%;">
 				</div>
 				<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 			</form>
@@ -28,7 +31,7 @@
 				<li><a href="http://www.pingpong-labs.com" target="_blank">Visit Site</a></li>
 				<li class="dropdown ">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						Account
+						{{currentUser.firstName}} {{currentUser.lastName}}
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li class="dropdown-header">SETTINGS</li>
@@ -36,15 +39,16 @@
 							<li class=""><a href="#">Other Link</a></li>
 							<li class=""><a href="#">Other Link</a></li>
 							<li class="divider"></li>
-							<li><a href="#">Logout</a></li>
+							<li><a [routerLink]="['/login']"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
-	</nav>  	<div class="container-fluid main-container">
-  		<div class="col-md-2 sidebar">
-  			<div class="row">
+	</nav>
+    <div class="container-fluid main-container">
+  		<div class="col-md-2 sidebar" style="height: 100%">
+  			<div class="row" style="height: 100%">
 	<!-- uncomment code for absolute positioning tweek see top comment in css -->
 	<div class="absolute-wrapper"> </div>
 	<!-- Menu -->
@@ -53,14 +57,15 @@
 			<!-- Main Menu -->
 			<div class="side-menu-container">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-plane"></span> Active Link</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Link</a></li>
+					<li class="active"><a href="#"><span class="glyphicon glyphicon-dashboard"></span> Overview</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-tasks"></span> Performance</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-signal"></span> Latency</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-fire"></span> Errors</a></li>
 
 					<!-- Dropdown-->
 					<li class="panel panel-default" id="dropdown">
 						<a data-toggle="collapse" href="#dropdown-lvl1">
-							<span class="glyphicon glyphicon-user"></span> Sub Level <span class="caret"></span>
+							<span class="glyphicon glyphicon-leaf"></span> Composition <span class="caret"></span>
 						</a>
 
 						<!-- Dropdown level 1 -->
@@ -74,7 +79,7 @@
 									<!-- Dropdown level 2 -->
 									<li class="panel panel-default" id="dropdown">
 										<a data-toggle="collapse" href="#dropdown-lvl2">
-											<span class="glyphicon glyphicon-off"></span> Sub Level <span class="caret"></span>
+											<span class="glyphicon glyphicon-arrow-down"></span> Sub Level <span class="caret"></span>
 										</a>
 										<div id="dropdown-lvl2" class="panel-collapse collapse">
 											<div class="panel-body">
@@ -91,7 +96,7 @@
 						</div>
 					</li>
 
-					<li><a href="#"><span class="glyphicon glyphicon-signal"></span> Link</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-th"></span> Custom</a></li>
 
 				</ul>
 			</div><!-- /.navbar-collapse -->
@@ -99,7 +104,7 @@
 
 	</div>
 </div>  		</div>
-  		<div class="col-md-10 content">
+  		<div class="col-md-10 content" style="margin-top: 10px;">
   			  <div class="panel panel-default">
 	<div class="panel-heading">
 		Dashboard
@@ -112,4 +117,6 @@
 		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	</div>
+</div>
+</div>
 </div>

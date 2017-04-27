@@ -13,3 +13,23 @@
 #tower-logo {
     width: 75%;
 }
+
+#tower-logo-dashboard {
+    height: 50px;
+    float: left;
+}
+
+.main-container {
+    height: calc(100vh - 52px);
+}
+
+.navbar {
+    height: 52px;
+    margin-bottom: 0px;
+}
+
+#search-bar {
+    width: 40%;
+    left: 17.2vw;
+    position: absolute;
+}
