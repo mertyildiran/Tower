@@ -37,3 +37,8 @@
 .alert {
     margin-bottom: 0px;
 }
+
+#api-selector {
+    float: left;
+    width: 100px;
+}
