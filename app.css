@@ -33,3 +33,7 @@
     left: 17.2vw;
     position: absolute;
 }
+
+.alert {
+    margin-bottom: 0px;
+}
