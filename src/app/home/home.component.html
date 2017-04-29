@@ -118,16 +118,27 @@
 
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="panel panel-info">
-                    <div class="panel-heading">
-                        Panel4
-                    </div>
                 	<div class="panel-body">
-                		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div style="display: block">
+                            <canvas baseChart width="200" height="200"
+                                    [data]="doughnutChartData"
+                                    [labels]="doughnutChartLabels"
+                                    [chartType]="doughnutChartType"
+                                    (chartHover)="chartHovered($event)"
+                                    (chartClick)="chartClicked($event)"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div style="display: block">
+                            <canvas baseChart width="200" height="200"
+                                    [data]="pieChartData"
+                                    [labels]="pieChartLabels"
+                                    [chartType]="pieChartType"
+                                    (chartHover)="chartHovered($event)"
+                                    (chartClick)="chartClicked($event)"></canvas>
+                            </div>
+                        </div>
                 	</div>
                 </div>
             </div>

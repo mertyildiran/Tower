@@ -83,9 +83,22 @@ export class HomeComponent implements OnInit {
     ];
 
 
+    // Doughnut
+    public doughnutChartLabels:string[] = ['Firefox', 'Safari', 'Chrome'];
+    public doughnutChartData:number[] = [0,0,0];
+    public doughnutChartType:string = 'doughnut';
+
+    // Pie
+    public pieChartLabels:string[] = ['OSX', 'Windows', 'Linux'];
+    public pieChartData:number[] = [0,0,0];
+    public pieChartType:string = 'pie';
+
+
     constructor(private http: Http) {
         this.loadChart1();
         this.loadChart3();
+        this.loadChart4();
+        this.loadChart5();
     }
 
     ngOnInit() {
@@ -170,6 +183,76 @@ export class HomeComponent implements OnInit {
                     {data: [succesful_counter], label: 'Succesful'},
                     {data: [failed_counter], label: 'Failed'}
                 ];
+
+                }
+            );
+    }
+
+    loadChart4() {
+        this.http.get('assets/sample_data.json')
+            .map((res: Response) => res.json())
+            .subscribe((res) => {
+                //do your operations with the response here
+                res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
+
+                var data = res; // Create a copy of the response
+                console.log(data.length)
+                var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
+                thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
+                var data_filtered = []; // Create an empty filtered data for push
+                data.forEach(function(element) {
+                    if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
+                        data_filtered.push(element);
+                    }
+                });
+
+                var browser_counter = [0,0,0] // Firefox, Safari, Chrome
+                data_filtered.forEach(function(element) {
+                    if (element['Browser Type'] == "Firefox") {
+                        browser_counter[0] += 1;
+                    } else if (element['Browser Type'] == "Safari") {
+                        browser_counter[1] += 1;
+                    } else if (element['Browser Type'] == "Chrome") {
+                        browser_counter[2] += 1;
+                    }
+                });
+
+                this.doughnutChartData = browser_counter;
+
+                }
+            );
+    }
+
+    loadChart5() {
+        this.http.get('assets/sample_data.json')
+            .map((res: Response) => res.json())
+            .subscribe((res) => {
+                //do your operations with the response here
+                res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
+
+                var data = res; // Create a copy of the response
+                console.log(data.length)
+                var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
+                thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
+                var data_filtered = []; // Create an empty filtered data for push
+                data.forEach(function(element) {
+                    if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
+                        data_filtered.push(element);
+                    }
+                });
+
+                var os_counter = [0,0,0] // Firefox, Safari, Chrome
+                data_filtered.forEach(function(element) {
+                    if (element['Device Type'] == "OSX") {
+                        os_counter[0] += 1;
+                    } else if (element['Device Type'] == "Windows") {
+                        os_counter[1] += 1;
+                    } else if (element['Device Type'] == "Linux") {
+                        os_counter[2] += 1;
+                    }
+                });
+
+                this.pieChartData = os_counter;
 
                 }
             );
