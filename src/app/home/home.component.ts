@@ -1,5 +1,6 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 @Component({
     moduleId: module.id,
@@ -7,6 +8,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 })
 
 export class HomeComponent implements OnInit {
+    @ViewChild(BaseChartDirective) chart: BaseChartDirective;
     selected_duration:number = 60;
 
     // lineChart1
@@ -34,14 +36,6 @@ export class HomeComponent implements OnInit {
         pointBorderColor: '#fff',
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgba(77,83,96,1)'
-      },
-      { // grey
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'rgba(148,159,177,1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
       }
     ];
     public lineChart1Legend:boolean = true;
@@ -146,6 +140,9 @@ export class HomeComponent implements OnInit {
                     {data: traffic_per_min, label: 'Traffic(byte)'},
                     {data: latency_per_min, label: 'Average Latency(ms)'}
                 ];
+
+                this.lineChart1Labels = new Array(traffic_per_min.length);
+                this.chart.chart.config.data.labels = this.lineChart1Labels;
 
                 }
             );
