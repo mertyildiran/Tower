@@ -2,9 +2,9 @@
   "name": "tower",
   "version": "0.0.0",
   "repository": {
-        "type": "git",
-        "url": "https://github.com/mertyildiran/Tower.git"
-    },
+    "type": "git",
+    "url": "https://github.com/mertyildiran/Tower.git"
+  },
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -24,7 +24,9 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "chart.js": "^2.5.0",
     "core-js": "^2.4.1",
+    "ng2-charts": "^1.5.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },
