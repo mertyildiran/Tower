@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 @Component({
     moduleId: module.id,
@@ -6,7 +7,19 @@
 })
 
 export class HomeComponent implements OnInit {
-      constructor() { }
+      constructor(private http: Http) {
+          this.http.get('assets/sample_data.json')
+            .map((res: Response) => res.json())
+            .subscribe((res) => {
+                 //do your operations with the response here
+                 this.printTheData(res);
+                }
+            );
+      }
+
+      printTheData(res){
+          console.dir(res);
+      }
 
       ngOnInit() {
       }
