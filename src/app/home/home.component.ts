@@ -49,16 +49,43 @@ export class HomeComponent implements OnInit {
 
 
     // events
-    public chart1Clicked(e:any):void {
+    public chartClicked(e:any):void {
       console.log(e);
     }
 
-    public chart1Hovered(e:any):void {
+    public chartHovered(e:any):void {
       console.log(e);
     }
+
+
+    // barChart3
+    public barChart3Options:any = {
+        scaleShowVerticalLines: false,
+        responsive: true
+    };
+    public barChart3Labels:string[] = ['Status'];
+    public barChart3Type:string = 'bar';
+    public barChart3Legend:boolean = true;
+
+    public barChart3Data:any[] = [
+        {data: [89], label: 'Succesful'},
+        {data: [14], label: 'Failed'}
+    ];
+    public barChart3Colors:Array<any> = [
+      { // green
+        backgroundColor: 'lightgreen',
+        borderColor: 'green'
+      },
+      { // red
+        backgroundColor: 'pink',
+        borderColor: 'red'
+      }
+    ];
+
 
     constructor(private http: Http) {
         this.loadChart1();
+        this.loadChart3();
     }
 
     ngOnInit() {
@@ -105,6 +132,43 @@ export class HomeComponent implements OnInit {
                 this.lineChart1Data = [ // Update the chart data
                     {data: traffic_per_min, label: 'Traffic(byte)'},
                     {data: latency_per_min, label: 'Average Latency(ms)'}
+                ];
+
+                }
+            );
+    }
+
+    loadChart3() {
+        this.http.get('assets/sample_data.json')
+            .map((res: Response) => res.json())
+            .subscribe((res) => {
+                //do your operations with the response here
+                res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
+
+                var data = res; // Create a copy of the response
+                console.log(data.length)
+                var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
+                thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
+                var data_filtered = []; // Create an empty filtered data for push
+                data.forEach(function(element) {
+                    if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
+                        data_filtered.push(element);
+                    }
+                });
+
+                var succesful_counter = 0;
+                var failed_counter = 0;
+                data_filtered.forEach(function(element) {
+                    if (element['Status'] == "Succesful") {
+                        succesful_counter += 1;
+                    } else if (element['Status'] == "Failed") {
+                        failed_counter += 1;
+                    }
+                });
+
+                this.barChart3Data = [
+                    {data: [succesful_counter], label: 'Succesful'},
+                    {data: [failed_counter], label: 'Failed'}
                 ];
 
                 }
