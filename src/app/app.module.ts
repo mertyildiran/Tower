@@ -18,6 +18,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PerformanceComponent } from './performance/performance.component';
+import { LatencyComponent } from './latency/latency.component';
+import { ErrorsComponent } from './errors/errors.component';
+import { CustomComponent } from './custom/custom.component';
 
 @NgModule({
     imports: [
@@ -32,7 +36,11 @@ import { NavbarComponent } from './navbar/navbar.component';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        NavbarComponent
+        NavbarComponent,
+        PerformanceComponent,
+        LatencyComponent,
+        ErrorsComponent,
+        CustomComponent
     ],
     providers: [
         AuthGuard,
