@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     public lineChart2Colors:Array<any> = [
       { // grey
         backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'rgba(148,159,177,1)',
+        borderColor: 'rgba(148,159,177,0.5)',
         pointBackgroundColor: 'rgba(148,159,177,1)',
         pointBorderColor: '#fff',
         pointHoverBackgroundColor: '#fff',
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       },
       { // dark grey
         backgroundColor: 'rgba(77,83,96,0.2)',
-        borderColor: 'rgba(77,83,96,1)',
+        borderColor: 'rgba(77,83,96,0.5)',
         pointBackgroundColor: 'rgba(77,83,96,1)',
         pointBorderColor: '#fff',
         pointHoverBackgroundColor: '#fff',
@@ -216,6 +216,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
                 var message_arr = [];
                 var response_arr = [];
+                var label_arr = [];
 
                 var data = res; // Create a copy of the response
                 var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
@@ -225,6 +226,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
                         message_arr.push(parseInt(element['Message Size(byte)']));
                         response_arr.push(parseInt(element['Response Time(ms)']));
+                        label_arr.push(element['Time'].slice(0, -4));
                     }
                 });
 
@@ -233,7 +235,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     {data: response_arr, label: 'Response Time(ms)'}
                 ];
 
-                this.lineChart2Labels = new Array(message_arr.length);
+                this.lineChart2Labels = label_arr;
                 this.charts[1].chart.config.data.labels = this.lineChart2Labels;
 
                 }
