@@ -18,4 +18,12 @@ ng serve --open
 
 The last command will open a new tab on your browser to demonstrate the up and running system. (http://localhost:4200/)
 
-The file located in `assets/sample_data.json` is the only sample data has been used to draw the charts.
+The file located in `src/data/sample_data.json` is the only sample data has been used to draw the charts.
+
+<p align="center">
+  <img src="http://i.imgur.com/UNQBinr.png" alt="Screenshot 1" height="200px"/>
+  <img src="http://i.imgur.com/PFLnFed.png" alt="Screenshot 2" height="200px"/>
+</p>
+<p align="center">
+  <img src="http://i.imgur.com/etNaywW.png" alt="Screenshot 3" height="200px"/>
+</p>
