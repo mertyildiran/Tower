@@ -8,9 +8,9 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 })
 
 export class HomeComponent implements OnInit, AfterViewInit {
-    @ViewChildren(BaseChartDirective) chart: QueryList<BaseChartDirective>;
+    @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
     selected_duration:number = 60;
-    charts: Array<any> = [];
+    chart: Array<any> = [];
 
     // lineChart1
     public lineChart1Data:Array<any> = [
@@ -150,10 +150,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     parseCharts() {
-        this.chart.forEach((child) => {
-            this.charts.push(child);
+        this.charts.forEach((child) => {
+            this.chart.push(child);
         });
-        console.log(this.charts[0]);
+        console.log(this.chart[0]);
     }
 
     loadChart1() {
@@ -201,7 +201,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
                 let range = n => Array.from(Array(n).keys())
                 this.lineChart1Labels = range(traffic_per_min.length);
-                this.charts[0].chart.config.data.labels = this.lineChart1Labels;
+                this.chart[0].chart.config.data.labels = this.lineChart1Labels;
 
                 }
             );
@@ -236,7 +236,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 ];
 
                 this.lineChart2Labels = label_arr;
-                this.charts[1].chart.config.data.labels = this.lineChart2Labels;
+                this.chart[1].chart.config.data.labels = this.lineChart2Labels;
 
                 }
             );
