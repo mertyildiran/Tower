@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
@@ -7,9 +7,10 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
     templateUrl: 'home.component.html'
 })
 
-export class HomeComponent implements OnInit {
-    @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+export class HomeComponent implements OnInit, AfterViewInit {
+    @ViewChildren(BaseChartDirective) chart: QueryList<BaseChartDirective>;
     selected_duration:number = 60;
+    charts: Array<any> = [];
 
     // lineChart1
     public lineChart1Data:Array<any> = [
@@ -52,6 +53,51 @@ export class HomeComponent implements OnInit {
     }
 
 
+    // lineChart2
+    public lineChart2Data:Array<any> = [
+        {data: [], label: 'Message Size(byte)'},
+        {data: [], label: 'Response Time(ms)'}
+    ];
+    public lineChart2Labels:Array<any> = new Array(60);
+    public lineChart2Options:any = {
+        responsive: true,
+        elements: {
+            point: { radius: 0 },
+            line: { tension: 0 }
+        },
+        tooltips: {enabled: false},
+        hover: {mode: null},
+        scales: {
+                yAxes : [{
+                    ticks : {
+                        max : 1000,
+                        min : 0
+                    }
+                }]
+            }
+    };
+    public lineChart2Colors:Array<any> = [
+      { // grey
+        backgroundColor: 'rgba(148,159,177,0.2)',
+        borderColor: 'rgba(148,159,177,1)',
+        pointBackgroundColor: 'rgba(148,159,177,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      },
+      { // dark grey
+        backgroundColor: 'rgba(77,83,96,0.2)',
+        borderColor: 'rgba(77,83,96,1)',
+        pointBackgroundColor: 'rgba(77,83,96,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(77,83,96,1)'
+      }
+    ];
+    public lineChart2Legend:boolean = true;
+    public lineChart2Type:string = 'line';
+
+
     // barChart3
     public barChart3Options:any = {
         scaleShowVerticalLines: false,
@@ -90,12 +136,24 @@ export class HomeComponent implements OnInit {
 
     constructor(private http: Http) {
         this.loadChart1();
+        this.loadChart2();
         this.loadChart3();
         this.loadChart4();
         this.loadChart5();
     }
 
     ngOnInit() {
+    }
+
+    ngAfterViewInit() {
+        this.parseCharts();
+    }
+
+    parseCharts() {
+        this.chart.forEach((child) => {
+            this.charts.push(child);
+        });
+        console.log(this.charts[0]);
     }
 
     loadChart1() {
@@ -141,8 +199,42 @@ export class HomeComponent implements OnInit {
                     {data: latency_per_min, label: 'Average Latency(ms)'}
                 ];
 
-                this.lineChart1Labels = new Array(traffic_per_min.length);
-                this.chart.chart.config.data.labels = this.lineChart1Labels;
+                let range = n => Array.from(Array(n).keys())
+                this.lineChart1Labels = range(traffic_per_min.length);
+                this.charts[0].chart.config.data.labels = this.lineChart1Labels;
+
+                }
+            );
+    }
+
+    loadChart2() {
+        this.http.get('assets/sample_data.json')
+            .map((res: Response) => res.json())
+            .subscribe((res) => {
+                //do your operations with the response here
+                res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
+
+                var message_arr = [];
+                var response_arr = [];
+
+                var data = res; // Create a copy of the response
+                var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
+                thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
+                var data_filtered = []; // Create an empty filtered data for push
+                data.forEach(function(element) {
+                    if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
+                        message_arr.push(parseInt(element['Message Size(byte)']));
+                        response_arr.push(parseInt(element['Response Time(ms)']));
+                    }
+                });
+
+                this.lineChart2Data = [ // Update the chart data
+                    {data: message_arr, label: 'Message Size(byte)'},
+                    {data: response_arr, label: 'Response Time(ms)'}
+                ];
+
+                this.lineChart2Labels = new Array(message_arr.length);
+                this.charts[1].chart.config.data.labels = this.lineChart2Labels;
 
                 }
             );
@@ -156,7 +248,7 @@ export class HomeComponent implements OnInit {
                 res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
 
                 var data = res; // Create a copy of the response
-                console.log(data.length)
+                //console.log(data.length)
                 var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
                 thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
                 var data_filtered = []; // Create an empty filtered data for push
@@ -193,7 +285,7 @@ export class HomeComponent implements OnInit {
                 res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
 
                 var data = res; // Create a copy of the response
-                console.log(data.length)
+                //console.log(data.length)
                 var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
                 thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
                 var data_filtered = []; // Create an empty filtered data for push
@@ -228,7 +320,7 @@ export class HomeComponent implements OnInit {
                 res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
 
                 var data = res; // Create a copy of the response
-                console.log(data.length)
+                //console.log(data.length)
                 var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
                 thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
                 var data_filtered = []; // Create an empty filtered data for push
