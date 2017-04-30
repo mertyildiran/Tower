@@ -24,6 +24,7 @@ import { ErrorsComponent } from './errors/errors.component';
 import { CustomComponent } from './custom/custom.component';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { NouisliderModule } from 'ng2-nouislider';
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
         FormsModule,
         HttpModule,
         routing,
-        ChartsModule
+        ChartsModule,
+        NouisliderModule
     ],
     declarations: [
         AppComponent,

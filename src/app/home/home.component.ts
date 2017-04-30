@@ -133,6 +133,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
     public pieChartData:number[] = [0,0,0];
     public pieChartType:string = 'pie';
 
+    sliderRange = [0,60];
+    sliderConfig: any = {
+      behaviour: 'drag',
+      connect: true,
+      keyboard: true,  // same as [keyboard]="true"
+      pageSteps: 10,  // number of page steps, defaults to 10
+      step: 5,
+      range: {
+        min: 0,
+        max: 60
+      },
+      pips: {
+        mode: 'count',
+        density: 2,
+        values: 5,
+        stepped: true
+      }
+    };
+
 
     constructor(private http: Http) {
         this.loadChart1();

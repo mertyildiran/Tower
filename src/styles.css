@@ -44,3 +44,18 @@ a {
     float: left;
     width: 100px;
 }
+
+#duration-slider-container {
+    text-align: center;
+    padding-bottom: 25px;
+    margin-top: -10px;
+}
+
+#duration-slider {
+    width: 40vw;
+    display: inline-block;
+}
+
+.noUi-value {
+    margin-top: 4px;
+}

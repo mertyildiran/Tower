@@ -61,6 +61,10 @@
 
     <div class="col-md-10 content" style="margin-top: 10px;">
 
+        <div id="duration-slider-container">
+            <nouislider id="duration-slider" [config]="sliderConfig" [(ngModel)]="sliderRange"></nouislider>
+        </div>
+
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="panel panel-default">
