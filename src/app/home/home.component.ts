@@ -10,6 +10,7 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 export class HomeComponent implements OnInit, AfterViewInit {
     @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
     chart: Array<any> = [];
+    sample_data:string = 'data/sample_data.json';
 
     // lineChart1
     public lineChart1Data:Array<any> = [
@@ -175,7 +176,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     loadChart1() {
-        this.http.get('assets/sample_data.json')
+        this.http.get(this.sample_data)
             .map((res: Response) => res.json())
             .subscribe((res) => {
                 //do your operations with the response here
@@ -230,7 +231,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     loadChart2() {
-        this.http.get('assets/sample_data.json')
+        this.http.get(this.sample_data)
             .map((res: Response) => res.json())
             .subscribe((res) => {
                 //do your operations with the response here
@@ -269,7 +270,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     loadChart3() {
-        this.http.get('assets/sample_data.json')
+        this.http.get(this.sample_data)
             .map((res: Response) => res.json())
             .subscribe((res) => {
                 //do your operations with the response here
@@ -309,7 +310,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     loadChart4() {
-        this.http.get('assets/sample_data.json')
+        this.http.get(this.sample_data)
             .map((res: Response) => res.json())
             .subscribe((res) => {
                 //do your operations with the response here
@@ -347,7 +348,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     loadChart5() {
-        this.http.get('assets/sample_data.json')
+        this.http.get(this.sample_data)
             .map((res: Response) => res.json())
             .subscribe((res) => {
                 //do your operations with the response here
