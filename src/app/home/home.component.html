@@ -62,7 +62,7 @@
     <div class="col-md-10 content" style="margin-top: 10px;">
 
         <div id="duration-slider-container">
-            <nouislider id="duration-slider" [config]="sliderConfig" [(ngModel)]="sliderRange"></nouislider>
+            <nouislider id="duration-slider" [config]="sliderConfig" [(ngModel)]="sliderRange" (ngModelChange)="onSliderChange($event)"></nouislider>
         </div>
 
         <div class="row">

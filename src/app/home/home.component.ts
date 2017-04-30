@@ -133,8 +133,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     public pieChartData:number[] = [0,0,0];
     public pieChartType:string = 'pie';
 
-    sliderRange = [0,60];
-    sliderConfig: any = {
+    public sliderRange = [0,60];
+    public sliderConfig: any = {
       behaviour: 'drag',
       connect: true,
       keyboard: true,  // same as [keyboard]="true"
@@ -183,11 +183,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
 
                 var data = res; // Create a copy of the response
-                var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
-                thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
+                var start = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as start point
+                var end = new Date("2017-05-01T" + data[0]['Time']); // Get the first datetime as end point
+                start.setTime(start.getTime() - ( (60 - this.sliderRange[0])*60*1000 )); // Set the start n x one hour backward
+                end.setTime(end.getTime() + ( (this.sliderRange[1])*60*1000 )); // Set the end m x one hour forward
                 var data_filtered = []; // Create an empty filtered data for push
+                var element_datetime;
                 data.forEach(function(element) {
-                    if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
+                    element_datetime = new Date("2017-05-01T" + element['Time'])
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
                         data_filtered.push(element);
                     }
                 });
@@ -238,11 +242,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 var label_arr = [];
 
                 var data = res; // Create a copy of the response
-                var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
-                thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
+                var start = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as start point
+                var end = new Date("2017-05-01T" + data[0]['Time']); // Get the first datetime as end point
+                start.setTime(start.getTime() - ( (60 - this.sliderRange[0])*60*1000 )); // Set the start n x one hour backward
+                end.setTime(end.getTime() + ( (this.sliderRange[1])*60*1000 )); // Set the end m x one hour forward
                 var data_filtered = []; // Create an empty filtered data for push
+                var element_datetime;
                 data.forEach(function(element) {
-                    if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
+                    element_datetime = new Date("2017-05-01T" + element['Time'])
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
                         message_arr.push(parseInt(element['Message Size(byte)']));
                         response_arr.push(parseInt(element['Response Time(ms)']));
                         label_arr.push(element['Time'].slice(0, -4));
@@ -269,12 +277,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
 
                 var data = res; // Create a copy of the response
-                //console.log(data.length)
-                var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
-                thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
+                var start = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as start point
+                var end = new Date("2017-05-01T" + data[0]['Time']); // Get the first datetime as end point
+                start.setTime(start.getTime() - ( (60 - this.sliderRange[0])*60*1000 )); // Set the start n x one hour backward
+                end.setTime(end.getTime() + ( (this.sliderRange[1])*60*1000 )); // Set the end m x one hour forward
                 var data_filtered = []; // Create an empty filtered data for push
+                var element_datetime;
                 data.forEach(function(element) {
-                    if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
+                    element_datetime = new Date("2017-05-01T" + element['Time'])
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
                         data_filtered.push(element);
                     }
                 });
@@ -306,12 +317,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
 
                 var data = res; // Create a copy of the response
-                //console.log(data.length)
-                var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
-                thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
+                var start = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as start point
+                var end = new Date("2017-05-01T" + data[0]['Time']); // Get the first datetime as end point
+                start.setTime(start.getTime() - ( (60 - this.sliderRange[0])*60*1000 )); // Set the start n x one hour backward
+                end.setTime(end.getTime() + ( (this.sliderRange[1])*60*1000 )); // Set the end m x one hour forward
                 var data_filtered = []; // Create an empty filtered data for push
+                var element_datetime;
                 data.forEach(function(element) {
-                    if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
+                    element_datetime = new Date("2017-05-01T" + element['Time'])
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
                         data_filtered.push(element);
                     }
                 });
@@ -341,12 +355,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 res.sort((a, b) => new Date("2017-05-01T" + b.Time).getTime() - new Date("2017-05-01T" + a.Time).getTime()).reverse();
 
                 var data = res; // Create a copy of the response
-                //console.log(data.length)
-                var thresh = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as threshold
-                thresh.setTime(thresh.getTime() - (this.selected_duration*60*1000)); // Set the threshold one hour back
+                var start = new Date("2017-05-01T" + data.slice(-1)[0]['Time']); // Get the last datetime as start point
+                var end = new Date("2017-05-01T" + data[0]['Time']); // Get the first datetime as end point
+                start.setTime(start.getTime() - ( (60 - this.sliderRange[0])*60*1000 )); // Set the start n x one hour backward
+                end.setTime(end.getTime() + ( (this.sliderRange[1])*60*1000 )); // Set the end m x one hour forward
                 var data_filtered = []; // Create an empty filtered data for push
+                var element_datetime;
                 data.forEach(function(element) {
-                    if (new Date("2017-05-01T" + element['Time']).getTime() > thresh.getTime()) {
+                    element_datetime = new Date("2017-05-01T" + element['Time'])
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
                         data_filtered.push(element);
                     }
                 });
@@ -366,6 +383,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
                 }
             );
+    }
+
+    public onSliderChange(e:any):void {
+        //console.log(this.sliderRange);
+        this.loadChart1();
+        this.loadChart2();
+        this.loadChart3();
+        this.loadChart4();
+        this.loadChart5();
     }
 
 }
