@@ -9,7 +9,6 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 export class HomeComponent implements OnInit, AfterViewInit {
     @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
-    selected_duration:number = 60;
     chart: Array<any> = [];
 
     // lineChart1
@@ -154,8 +153,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 
     constructor(private http: Http) {
-        this.loadChart1();
-        this.loadChart2();
         this.loadChart3();
         this.loadChart4();
         this.loadChart5();
@@ -166,13 +163,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this.parseCharts();
+        this.loadChart1();
+        this.loadChart2();
     }
 
     parseCharts() {
         this.charts.forEach((child) => {
             this.chart.push(child);
         });
-        console.log(this.chart[0]);
+        //console.log(this.chart[0]);
     }
 
     loadChart1() {
@@ -190,8 +189,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 var data_filtered = []; // Create an empty filtered data for push
                 var element_datetime;
                 data.forEach(function(element) {
-                    element_datetime = new Date("2017-05-01T" + element['Time'])
-                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
+                    element_datetime = new Date("2017-05-01T" + element['Time']);
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) { // This is a criteria defined by the range slider.
                         data_filtered.push(element);
                     }
                 });
@@ -222,9 +221,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     {data: latency_per_min, label: 'Average Latency(ms)'}
                 ];
 
-                let range = n => Array.from(Array(n).keys())
+                let range = n => Array.from(Array(n).keys()) // This is a function decleration. The function is exactly the same as Python's range(n) function. ECMAScript 6 feature used.
                 this.lineChart1Labels = range(traffic_per_min.length);
-                this.chart[0].chart.config.data.labels = this.lineChart1Labels;
+                this.chart[0].chart.config.data.labels = this.lineChart1Labels; // This line is necessary because ng2-charts is not updating the chart's labels automatically
 
                 }
             );
@@ -249,8 +248,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 var data_filtered = []; // Create an empty filtered data for push
                 var element_datetime;
                 data.forEach(function(element) {
-                    element_datetime = new Date("2017-05-01T" + element['Time'])
-                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
+                    element_datetime = new Date("2017-05-01T" + element['Time']);
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) { // This is a criteria defined by the range slider.
                         message_arr.push(parseInt(element['Message Size(byte)']));
                         response_arr.push(parseInt(element['Response Time(ms)']));
                         label_arr.push(element['Time'].slice(0, -4));
@@ -263,7 +262,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 ];
 
                 this.lineChart2Labels = label_arr;
-                this.chart[1].chart.config.data.labels = this.lineChart2Labels;
+                this.chart[1].chart.config.data.labels = this.lineChart2Labels; // This line is necessary because ng2-charts is not updating the chart's labels automatically
 
                 }
             );
@@ -284,8 +283,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 var data_filtered = []; // Create an empty filtered data for push
                 var element_datetime;
                 data.forEach(function(element) {
-                    element_datetime = new Date("2017-05-01T" + element['Time'])
-                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
+                    element_datetime = new Date("2017-05-01T" + element['Time']);
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) { // This is a criteria defined by the range slider.
                         data_filtered.push(element);
                     }
                 });
@@ -324,8 +323,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 var data_filtered = []; // Create an empty filtered data for push
                 var element_datetime;
                 data.forEach(function(element) {
-                    element_datetime = new Date("2017-05-01T" + element['Time'])
-                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
+                    element_datetime = new Date("2017-05-01T" + element['Time']);
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) { // This is a criteria defined by the range slider.
                         data_filtered.push(element);
                     }
                 });
@@ -362,8 +361,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 var data_filtered = []; // Create an empty filtered data for push
                 var element_datetime;
                 data.forEach(function(element) {
-                    element_datetime = new Date("2017-05-01T" + element['Time'])
-                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) {
+                    element_datetime = new Date("2017-05-01T" + element['Time']);
+                    if ( (element_datetime.getTime() > start.getTime()) && (element_datetime.getTime() < end.getTime()) ) { // This is a criteria defined by the range slider.
                         data_filtered.push(element);
                     }
                 });
