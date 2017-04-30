@@ -203,7 +203,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 var subtotal2 = 0;
                 var counter = 0;
                 data_filtered.forEach(function(element) {
-                    if ( (new Date("2017-05-01T" + element['Time']).getTime() - this_min.getTime()) > (1*60*1000) ) { // If current element's datetime is more than a minute ahead of current this_min
+                    if ( new Date("2017-05-01T" + element['Time']).setSeconds(0,0) > this_min.setSeconds(0,0) ) { // If current element's minute is bigger than this_min's minute
                         this_min.setTime(this_min.getTime() + (1*60*1000)); // Update this_min = this_min + 1 minute
                         traffic_per_min.push(subtotal/counter); // Push sub-average
                         latency_per_min.push(subtotal2/counter); // Push sub-average
